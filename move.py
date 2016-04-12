@@ -28,7 +28,7 @@ class Move:
             digits=price_digits, states=STATES, depends=['state']),
         'get_origin_fields')
     discount = fields.Function(fields.Numeric('Discount',
-            digits=(16, discount_digits), states=STATES, depends=['state']),
+            digits=discount_digits, states=STATES, depends=['state']),
         'get_origin_fields')
     untaxed_amount = fields.Function(fields.Numeric('Untax Amount',
             digits=(16, Eval('currency_digits', 2)), states=STATES,
