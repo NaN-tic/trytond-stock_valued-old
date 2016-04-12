@@ -6,9 +6,9 @@ from trytond.model import fields
 from trytond.pool import Pool, PoolMeta
 from trytond.pyson import Equal, Eval, Not
 from trytond.transaction import Transaction
-from trytond.config import config as config_
 from trytond.modules.product import price_digits
-DISCOUNT_DIGITS = config_.getint('product', 'discount_decimal', default=4)
+from trytond.modules.account_invoice_discount import discount_digits
+
 
 __all__ = ['Move']
 __metaclass__ = PoolMeta
@@ -28,7 +28,7 @@ class Move:
             digits=price_digits, states=STATES, depends=['state']),
         'get_origin_fields')
     discount = fields.Function(fields.Numeric('Discount',
-            digits=(16, DISCOUNT_DIGITS), states=STATES, depends=['state']),
+            digits=(16, discount_digits), states=STATES, depends=['state']),
         'get_origin_fields')
     untaxed_amount = fields.Function(fields.Numeric('Untax Amount',
             digits=(16, Eval('currency_digits', 2)), states=STATES,
